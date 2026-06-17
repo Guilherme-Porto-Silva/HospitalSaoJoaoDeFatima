@@ -59,14 +59,18 @@ public class MedicoView extends JInternalFrame {
 
         catch (SQLException e) {
 
-        JOptionPane.showMessageDialog(this,"Não foi possível carregar os planos de saúde.");
+            e.printStackTrace();
+
+            JOptionPane.showMessageDialog(this,"Não foi possível carregar os planos de saúde.");
         }
 
         try { carregarTabela(); }
 
         catch (SQLException e) {
 
-        JOptionPane.showMessageDialog(this,"Não foi possível carregar a tabela.");
+            e.printStackTrace();
+
+            JOptionPane.showMessageDialog(this,"Não foi possível carregar a tabela.");
         }
     }
     
@@ -123,9 +127,9 @@ public class MedicoView extends JInternalFrame {
         
         model.setRowCount(0);
         
-        byte tamanhoLista = (byte) lista.size();
+        var tamanhoLista = lista.size();
         
-        for (byte i = 0; i < tamanhoLista; i++) model.addRow(new String[] {
+for (int i = 0; i < tamanhoLista; i++) model.addRow(new String[] {
 
                 String.valueOf(lista.get(i).getCodigoMedico()),
 
@@ -197,7 +201,9 @@ public class MedicoView extends JInternalFrame {
 
             catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(this,"Um problema técnico impediu a edição dos dados.");
+                e.printStackTrace();
+
+                JOptionPane.showMessageDialog(this, "O seguinte problema técnico impediu a edição dos dados:/n/n" + e.getMessage());
             }
         });
         
@@ -207,7 +213,9 @@ public class MedicoView extends JInternalFrame {
 
             catch (SQLException e) {
 
-            JOptionPane.showMessageDialog(this, "Um problema técnico impediu a exclusão dos dados.");
+                e.printStackTrace();
+
+                JOptionPane.showMessageDialog(this, "O seguinte problema técnico impediu a exclusão dos dados:/n/n" + e.getMessage());
             }
         });
         
