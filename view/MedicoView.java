@@ -203,7 +203,7 @@ for (int i = 0; i < tamanhoLista; i++) model.addRow(new String[] {
 
                 e.printStackTrace();
 
-                JOptionPane.showMessageDialog(this, "O seguinte problema técnico impediu a edição dos dados:/n/n" + e.getMessage());
+                JOptionPane.showMessageDialog(this, "O seguinte problema técnico impediu a edição dos dados:\n\n" + e.getMessage());
             }
         });
         
@@ -215,7 +215,7 @@ for (int i = 0; i < tamanhoLista; i++) model.addRow(new String[] {
 
                 e.printStackTrace();
 
-                JOptionPane.showMessageDialog(this, "O seguinte problema técnico impediu a exclusão dos dados:/n/n" + e.getMessage());
+                JOptionPane.showMessageDialog(this, "O seguinte problema técnico impediu a exclusão dos dados:\n\n" + e.getMessage());
             }
         });
         

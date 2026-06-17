@@ -26,11 +26,13 @@ public class MedicoController {
 
         sentenca.setInt(2, medico.getPlano().getCodigoPlano());
 
-        boolean retorno = !sentenca.execute();
-
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
+        
         DB.desconectar();
-
-        return retorno;
+        
+        return deuCerto;
     }
 
 
@@ -49,11 +51,13 @@ public class MedicoController {
 
         sentenca.setInt(3, medico.getCodigoMedico());
 
-        boolean retorno = !sentenca.execute();
-
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
+        
         DB.desconectar();
-
-        return retorno;
+        
+        return deuCerto;
     }
 
 
@@ -68,11 +72,13 @@ public class MedicoController {
 
         sentenca.setInt(1, medico.getCodigoMedico());
 
-        boolean retorno = !sentenca.execute();
-
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
+        
         DB.desconectar();
-
-        return retorno;
+        
+        return deuCerto;
     }
 
 

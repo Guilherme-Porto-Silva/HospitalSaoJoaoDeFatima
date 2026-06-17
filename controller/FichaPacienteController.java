@@ -26,11 +26,13 @@ public class FichaPacienteController {
 
         sentenca.setString(2, ficha.getDescricao());
 
-        boolean retorno = !sentenca.execute();
-
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
+        
         DB.desconectar();
-
-        return retorno;
+        
+        return deuCerto;
     }
 
 
@@ -49,11 +51,13 @@ public class FichaPacienteController {
 
         sentenca.setInt(3, ficha.getCodigoFicha());
 
-        boolean retorno = !sentenca.execute();
-
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
+        
         DB.desconectar();
-
-        return retorno;
+        
+        return deuCerto;
     }
 
 
@@ -68,11 +72,13 @@ public class FichaPacienteController {
 
         sentenca.setInt(1, ficha.getCodigoFicha());
 
-        boolean retorno = !sentenca.execute();
-
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
+        
         DB.desconectar();
-
-        return retorno;
+        
+        return deuCerto;
     }
 
 

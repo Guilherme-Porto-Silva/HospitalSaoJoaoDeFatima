@@ -22,17 +22,19 @@ public class ConsultaController {
 
         PreparedStatement sentenca = DB.conector.prepareStatement(sql);
         
-        sentenca.setInt(1, consulta.getMedico().getCodigoMedico());
+        sentenca.setInt(1, consulta.medico().getCodigoMedico());
         
-        sentenca.setInt(2, consulta.getPaciente().getCodigoPaciente());
+        sentenca.setInt(2, consulta.paciente().getCodigoPaciente());
         
-        sentenca.setString(3, consulta.getData());
+        sentenca.setString(3, consulta.data());
+
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
         
-        boolean retorno = !sentenca.execute();
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
         
         DB.desconectar();
         
-        return retorno;
+        return deuCerto;
     }
     
     
@@ -45,19 +47,21 @@ public class ConsultaController {
 
         PreparedStatement sentenca = DB.conector.prepareStatement(sql);
         
-        sentenca.setInt(1, consulta.getMedico().getCodigoMedico());
+        sentenca.setInt(1, consulta.medico().getCodigoMedico());
         
-        sentenca.setInt(2, consulta.getPaciente().getCodigoPaciente());
+        sentenca.setInt(2, consulta.paciente().getCodigoPaciente());
         
-        sentenca.setString(3, consulta.getData());
+        sentenca.setString(3, consulta.data());
         
-        sentenca.setInt(4, consulta.getCodigoConsulta());
+        sentenca.setInt(4, consulta.codigoConsulta());
         
-        boolean retorno = !sentenca.execute();
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
         
         DB.desconectar();
         
-        return retorno;
+        return deuCerto;
     }
     
     
@@ -70,18 +74,20 @@ public class ConsultaController {
 
         PreparedStatement sentenca = DB.conector.prepareStatement(sql);
         
-        sentenca.setInt(1, consulta.getCodigoConsulta());
+        sentenca.setInt(1, consulta.codigoConsulta());
         
-        boolean retorno = !sentenca.execute();
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
         
         DB.desconectar();
         
-        return retorno;
+        return deuCerto;
     }
     
     
 
-    public ConsultaModel pesquisar(ConsultaModel consulta) throws SQLException {
+    public ConsultaModel pesquisar (ConsultaModel consulta) throws SQLException {
         
         ConsultaModel retorno = null;
         
@@ -91,22 +97,11 @@ public class ConsultaController {
 
         PreparedStatement sentenca = DB.conector.prepareStatement(sql);
         
-        sentenca.setInt(1, consulta.getCodigoConsulta());
+        sentenca.setInt(1, consulta.codigoConsulta());
         
         ResultSet encontrado = sentenca.executeQuery();
         
-        if (encontrado.next()) {
-
-            retorno = new ConsultaModel(encontrado.getInt(1), encontrado.getString(4), encontrado.getInt(2), encontrado.getInt(3));
-
-            retorno.setCodigoConsulta(encontrado.getInt(1));
-
-            retorno.getMedico().setCodigoMedico(encontrado.getInt(2));
-
-            retorno.getPaciente().setCodigoPaciente(encontrado.getInt(3));
-
-            retorno.setData(encontrado.getString(4));
-        }
+        if (encontrado.next()) retorno = new ConsultaModel(encontrado.getInt(1), encontrado.getString(4), encontrado.getInt(2), encontrado.getInt(3));
         
         DB.desconectar();
         
@@ -129,15 +124,7 @@ public class ConsultaController {
 
         while (encontrado.next()) {
 
-            ConsultaModel consulta = new ConsultaModel();
-
-            consulta.setCodigoConsulta(encontrado.getInt(1));
-
-            consulta.getMedico().setCodigoMedico(encontrado.getInt(2));
-
-            consulta.getPaciente().setCodigoPaciente(encontrado.getInt(3));
-
-            consulta.setData(encontrado.getString(4));
+            ConsultaModel consulta = new ConsultaModel(encontrado.getInt(1), encontrado.getString(4), encontrado.getInt(2), encontrado.getInt(3));
 
             retorno.add(consulta);
         }

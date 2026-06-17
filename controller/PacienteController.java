@@ -28,11 +28,13 @@ public class PacienteController {
         
         sentenca.setInt(3, paciente.getIdade());
 
-        boolean retorno = !sentenca.execute();
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
         
         DB.desconectar();
         
-        return retorno;
+        return deuCerto;
     }
     
     
@@ -72,11 +74,13 @@ public class PacienteController {
         
         sentenca.setInt(1, paciente.getCodigoPaciente());
 
-        boolean retorno = !sentenca.execute();
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
         
         DB.desconectar();
         
-        return retorno;
+        return deuCerto;
     }
     
     

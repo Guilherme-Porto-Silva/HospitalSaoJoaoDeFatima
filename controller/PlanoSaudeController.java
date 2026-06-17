@@ -24,11 +24,13 @@ public class PlanoSaudeController {
 
         sentenca.setString(1, plano.getNome());
 
-        boolean retorno = !sentenca.execute();
-
+        var quantasLinhasAlteradas = sentenca.executeUpdate();
+        
+        boolean deuCerto = (quantasLinhasAlteradas > 0);
+        
         DB.desconectar();
-
-        return retorno;
+        
+        return deuCerto;
     }
 
 

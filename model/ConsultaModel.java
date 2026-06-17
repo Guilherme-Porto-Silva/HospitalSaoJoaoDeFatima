@@ -16,24 +16,29 @@ public class ConsultaModel {
 
     private final PacienteModel PACIENTE;
 
-    public ConsultaModel(int codigoConsulta, String data, MedicoModel medico, PacienteModel paciente) {
+    private LocalDate conferirData (String dataEnviada) {
 
-        LocalDate data1;
+        LocalDate dataConferida;
 
-        try { data1 = LocalDate.parse(data, FORMATO_DATA); }
+        try { dataConferida = LocalDate.parse(dataEnviada, FORMATO_DATA); }
 
         catch (Exception e) {
 
-            String mensagemErro = "A data \"" + data + "\" está no formato errado.\n\nO formato certo seria \"dd/MM/yyyy\".";
+            String mensagemErro = "A data \"" + dataEnviada + "\" está no formato errado.\n\nO formato certo seria \"dd/MM/yyyy\".";
 
             System.out.println(mensagemErro);
 
             JOptionPane.showMessageDialog(new JOptionPane(), mensagemErro);
 
-            data1 = LocalDate.now();
+            dataConferida = LocalDate.now();
         }
 
-        DATA = data1;
+        return dataConferida;
+    }
+
+    public ConsultaModel (int codigoConsulta, String data, MedicoModel medico, PacienteModel paciente) {
+
+        DATA = conferirData(data);
 
         CODIGO_CONSULTA = codigoConsulta;
 
@@ -42,9 +47,18 @@ public class ConsultaModel {
         PACIENTE = paciente;
     }
 
-    public int codigoConsulta () { return CODIGO_CONSULTA; }
+    public ConsultaModel (int codigoConsulta, String data, int codigoMedico, int codigoPaciente) {
 
-    public LocalDate data () { return DATA; }
+        MedicoModel medico = new MedicoModel(codigoMedico);
+
+        PacienteModel paciente = new PacienteModel(codigoPaciente);
+
+        this(codigoConsulta, data, medico, paciente);
+    }
+
+    public String data () { return DATA.format(FORMATO_DATA); }
+
+    public int codigoConsulta () { return CODIGO_CONSULTA; }
 
     public MedicoModel medico () { return MEDICO; }
 

@@ -6,13 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import model.PacienteModel;
 import model.PlanoSaudeModel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class PacienteView extends JInternalFrame {
 
@@ -47,7 +45,6 @@ public class PacienteView extends JInternalFrame {
     private JTextField jtxIdade;
     
     private JTextField jtxNome;
-    
 
     private PacienteController controle = new PacienteController();
     
@@ -82,12 +79,10 @@ public class PacienteView extends JInternalFrame {
         try { carregarPlanoSaude(); }
 
         catch (SQLException e) { avisarErro(e, "Não foi possível carregar os planos de saúde."); }
-        }
 
         try { carregarTabela(); }
 
         catch (SQLException e) { avisarErro(e, "Não foi possível carregar a tabela."); }
-        }
     }
     
     
@@ -194,7 +189,7 @@ for (int i = 0; i < tamanhoLista; i++) model.addRow(new String[] {String.valueOf
             
             try { jbPesquisarActionPerformed (evt); }
                
-            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a pesquisa:/n/n"); }
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a pesquisa:\n\n"); }
         });
         
         jbNovo.addActionListener(evt -> jbNovoActionPerformed (evt));
@@ -203,7 +198,7 @@ for (int i = 0; i < tamanhoLista; i++) model.addRow(new String[] {String.valueOf
             
             try { jbSalvarActionPerformed (evt); }
                
-            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu o arquivamento:/n/n"); }
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu o arquivamento:\n\n"); }
         });
         
         jbEditar.addActionListener(evt -> {
@@ -217,7 +212,7 @@ for (int i = 0; i < tamanhoLista; i++) model.addRow(new String[] {String.valueOf
             
             try { jbExcluirActionPerformed (evt); }
             
-            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a exclusão:/n/n"); }
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a exclusão:\n\n"); }
         });
         
         jbFechar.addActionListener(evt -> jbFecharActionPerformed (evt));
