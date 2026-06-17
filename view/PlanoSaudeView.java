@@ -40,6 +40,22 @@ public class PlanoSaudeView extends JInternalFrame {
 
     private final PlanoSaudeController CONTROLE = new PlanoSaudeController();
 
+
+
+    private void avisarErro (Exception braba, String mensagem) {
+
+            braba.printStackTrace();
+
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
+
+    private void avisarErro (Exception braba) {
+
+            braba.printStackTrace();
+
+            JOptionPane.showMessageDialog(this, braba.getMessage());
+        }
+
     
     
     public PlanoSaudeView() {
@@ -50,10 +66,7 @@ public class PlanoSaudeView extends JInternalFrame {
 
         try { carregarTabela(); }
 
-        catch (SQLException e) {
-
-        JOptionPane.showMessageDialog(this,"Não foi possível carregar a tabela.");
-        }
+        catch (SQLException e) { avisarErro(e, "Não foi possível carregar a tabela."); }
     }
     
     
@@ -94,9 +107,9 @@ public class PlanoSaudeView extends JInternalFrame {
         
         model.setRowCount(0);
         
-        byte tamanhoLista = (byte) lista.size();
+        var tamanhoLista = lista.size();
         
-        for (byte i = 0; i < tamanhoLista; i++)
+        for (int i = 0; i < tamanhoLista; i++)
             
             model.addRow(new String[] {
                     
@@ -139,37 +152,33 @@ public class PlanoSaudeView extends JInternalFrame {
         setTitle("Cadastro Plano de Saúde");
 
         jbPesquisar.addActionListener(evt -> {
-            try {
-                jbPesquisarActionPerformed(evt);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Um problema relacionado ao banco de dados impediu a pesquisa.");
-            }
+            
+            try { jbPesquisarActionPerformed(evt); }
+            
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a pesquisa."); }
         });
         
         jbNovo.addActionListener(evt -> jbNovoActionPerformed(evt));
         
         jbSalvar.addActionListener(evt -> {
-            try {
-                jbSalvarActionPerformed(evt);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Um problema relacionado ao banco de dados impediu o arquivamento.");
-            }
+            
+            try { jbSalvarActionPerformed(evt); }
+            
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu o arquivamento."); }
         });
         
         jbEditar.addActionListener(evt -> {
-            try {
-                jbEditarActionPerformed(evt);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Um problema relacionado ao banco de dados impediu a edição.");
-            }
+            
+            try { jbEditarActionPerformed(evt); }
+            
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a edição."); }
         });
         
         jbExcluir.addActionListener(evt -> {
-            try {
-                jbExcluirActionPerformed(evt);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Um problema relacionado ao banco de dados impediu a exclusão.");
-            }
+            
+            try { jbExcluirActionPerformed(evt); }
+            
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a exclusão."); }
         });
         
         jbFechar.addActionListener(evt -> jbFecharActionPerformed(evt));
