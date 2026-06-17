@@ -8,9 +8,7 @@ public class PacienteModel {
 
     private int idade;
 
-    // BD - CHAVE ESTRANGEIRA (int) <=> APLICAÇÃO - OBJETO
-
-    private PlanoSaudeModel plano;
+    private PlanoSaudeModel plano; // BD - CHAVE ESTRANGEIRA (int) <=> APLICAÇÃO - OBJETO
 
     public PacienteModel() { plano = new PlanoSaudeModel(); }
 
