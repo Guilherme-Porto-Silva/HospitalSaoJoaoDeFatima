@@ -54,6 +54,22 @@ public class PacienteView extends JInternalFrame {
     private PlanoSaudeController planoControle = new PlanoSaudeController();
     
     private List<PlanoSaudeModel> listaPlanos;
+
+
+
+    private void avisarErro (Exception braba, String mensagem) {
+
+            braba.printStackTrace();
+
+            JOptionPane.showMessageDialog(this, mensagem);
+        }
+
+    private void avisarErro (Exception braba) {
+
+            braba.printStackTrace();
+
+            JOptionPane.showMessageDialog(this, braba.getMessage());
+        }
     
     
 
@@ -65,16 +81,12 @@ public class PacienteView extends JInternalFrame {
 
         try { carregarPlanoSaude(); }
 
-        catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(this,"Não foi possível carregar os planos de saúde.");
+        catch (SQLException e) { avisarErro(e, "Não foi possível carregar os planos de saúde."); }
         }
 
         try { carregarTabela(); }
 
-        catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(this,"Não foi possível carregar a tabela.");
+        catch (SQLException e) { avisarErro(e, "Não foi possível carregar a tabela."); }
         }
     }
     
@@ -135,12 +147,9 @@ public class PacienteView extends JInternalFrame {
         
         model.setRowCount(0);
         
-        byte tamanhoLista = (byte) lista.size();
+        var tamanhoLista = lista.size();
         
-        for (byte i = 0; i < tamanhoLista; i++) {
-            
-model.addRow(new String[] {String.valueOf(lista.get(i).getCodigoPaciente()), lista.get(i).getNome(), String.valueOf(lista.get(i).getIdade()), String.valueOf(lista.get(i).getPlano().getCodigoPlano())});
-        }
+for (int i = 0; i < tamanhoLista; i++) model.addRow(new String[] {String.valueOf(lista.get(i).getCodigoPaciente()), lista.get(i).getNome(), String.valueOf(lista.get(i).getIdade()), String.valueOf(lista.get(i).getPlano().getCodigoPlano())});
     }
     
     
@@ -182,37 +191,33 @@ model.addRow(new String[] {String.valueOf(lista.get(i).getCodigoPaciente()), lis
         setTitle("Cadastro Paciente");
 
         jbPesquisar.addActionListener(evt -> {
-            try {
-                jbPesquisarActionPerformed (evt);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Um problema relacionado ao banco de dados impediu a pesquisa.");
-            }
+            
+            try { jbPesquisarActionPerformed (evt); }
+               
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a pesquisa:/n/n"); }
         });
         
         jbNovo.addActionListener(evt -> jbNovoActionPerformed (evt));
         
         jbSalvar.addActionListener(evt -> {
-            try {
-                jbSalvarActionPerformed (evt);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Um problema relacionado ao banco de dados impediu o arquivamento.");
-            }
+            
+            try { jbSalvarActionPerformed (evt); }
+               
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu o arquivamento:/n/n"); }
         });
         
         jbEditar.addActionListener(evt -> {
-            try {
-                jbEditarActionPerformed (evt);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Um problema relacionado ao banco de dados impediu a edição.");
-            }
+            
+            try { jbEditarActionPerformed (evt); }
+               
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a edição."); }
         });
         
         jbExcluir.addActionListener(evt -> {
-            try {
-                jbExcluirActionPerformed (evt);
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Um problema relacionado ao banco de dados impediu a exclusão.");
-            }
+            
+            try { jbExcluirActionPerformed (evt); }
+            
+            catch (SQLException e) { avisarErro(e, "Um problema relacionado ao banco de dados impediu a exclusão:/n/n"); }
         });
         
         jbFechar.addActionListener(evt -> jbFecharActionPerformed (evt));
