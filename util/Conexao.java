@@ -50,7 +50,7 @@ public class Conexao {
 
         catch (ClassNotFoundException e) { avisarErro("Driver de conexão não encontrado."); }
 
-        catch (SQLException e) { avisarErro("Erro ao conectar com banco: " + e.getMessage()); }
+        catch (SQLException e) { avisarErro(e); }
     }
 
     public void desconectar() {
