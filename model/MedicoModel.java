@@ -6,9 +6,7 @@ public class MedicoModel {
 
     private String nome;
 
-    // BD - CHAVE ESTRANGEIRA (int) <=> APLICAÇÃO - OBJETO
-
-    private PlanoSaudeModel plano;
+    private PlanoSaudeModel plano; // BD - CHAVE ESTRANGEIRA (int) <=> APLICAÇÃO - OBJETO
 
     public MedicoModel() { plano = new PlanoSaudeModel(); }
 
