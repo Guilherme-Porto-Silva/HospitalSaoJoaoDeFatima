@@ -6,9 +6,7 @@ public class FichaPacienteModel {
 
     private String descricao;
 
-    // BD - CHAVE ESTRANGEIRA (int) <=> APLICAÇÃO - OBJETO
-
-    private PacienteModel paciente;
+    private PacienteModel paciente; // BD - CHAVE ESTRANGEIRA (int) <=> APLICAÇÃO - OBJETO
 
     public FichaPacienteModel() { paciente = new PacienteModel(); }
 
