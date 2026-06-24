@@ -10,6 +10,13 @@ public class MedicoModel {
 
     public MedicoModel() { plano = new PlanoSaudeModel(); }
 
+    public MedicoModel (int codigo) {
+
+        codigoMedico = codigo;
+
+        this();
+    }
+
     public int getCodigoMedico() { return codigoMedico; }
 
     public void setCodigoMedico (int codigoMedico) {

@@ -12,6 +12,13 @@ public class PacienteModel {
 
     public PacienteModel() { plano = new PlanoSaudeModel(); }
 
+    public PacienteModel (int codigo) {
+
+        codigoPaciente = codigo;
+
+        this();
+    }
+
     public int getCodigoPaciente() { return codigoPaciente; }
 
     public void setCodigoPaciente (int codigoPaciente) {
